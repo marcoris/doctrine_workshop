@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Column;
@@ -27,6 +28,13 @@ class Category
      * @Column(type="string", length=140)
      */
     private $name;
+
+    /**
+     * @var Collection
+     *
+     * @ManyToMany (targetEntity="Post", mappedBy="categories")
+     */
+    private $posts;
 
     /**
      * @return string

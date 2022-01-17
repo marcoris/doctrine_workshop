@@ -32,9 +32,9 @@ class Tag
     /**
      * @var Collection
      *
-     * @ManyToMany (targetEntity="Message", mappedBy="tags")
+     * @ManyToMany (targetEntity="Post", mappedBy="tags")
      */
-    private $messages;
+    private $posts;
 
     /**
      * @return string
@@ -63,8 +63,8 @@ class Tag
     /**
      * @return Collection
      */
-    public function getMessages()
+    public function getPosts()
     {
-        return $this->messages;
+        return $this->posts;
     }
 }
