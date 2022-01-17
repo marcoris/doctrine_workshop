@@ -61,6 +61,22 @@ support a nice development URL instead of your IP (Mac: use terminal, Windows: u
 * [MariaDB](https://mariadb.org/)
 * [Composer](https://getcomposer.org/)
 * [Xdebug](https://xdebug.org/)
+* [Doctrine datatypes](https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html#mapping-matrix)
 
-## Changelog
-Please see the [CHANGELOG.md](./CHANGELOG.md)
+## ORM
+### Log into VM
+```bash
+vagrant ssh
+```
+### Change directory
+````bash
+cd /var/www/public
+````
+### Migrate
+````bash
+vendor/bin/doctrine orm:schema-tool:create
+````
+### Update
+````bash
+vendor/bin/doctrine orm:schema-tool:update --force
+````
