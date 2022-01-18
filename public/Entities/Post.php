@@ -34,7 +34,7 @@ class Post
 
     /**
      * @var string
-     * @Column(type="string", length=140)
+     * @Column(type="text")
      */
     private $text;
 
@@ -125,6 +125,16 @@ class Post
     public function setText(string $text): void
     {
         $this->text = $text;
+    }
+
+    /**
+     * @param int $length
+     * @param string $sign
+     * @return string
+     */
+    public function getTextExcerpt(int $length = 200, string $sign = "...")
+    {
+        return substr($this->text, 0, $length) . "<a href='/blog/id/" . $this->id . "'>[" . $sign . "]</a>";
     }
 
     /**
