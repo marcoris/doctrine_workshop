@@ -18,7 +18,7 @@ function getEntityManager()
     );
 
     $config = Setup::createAnnotationMetadataConfiguration($path, $isDevMode, "Entities/Proxies");
-    $config->setProxyNamespace("App\\Entities\\proxies");
+    $config->setProxyNamespace("App\\Entities\\Proxies");
     $config->setAutoGenerateProxyClasses($isDevMode);
 
     return EntityManager::create($dbParams, $config);
