@@ -19,7 +19,25 @@ if (!$post) {
             $catArray = "";
             foreach ($categories as $category) {
                 if ($category) {
-                    $catArray .= '<span class="badge bg-info">' . $category->getName() . '</span> ';
+                    $color = "";
+                    switch ($category->getId()) {
+                        case 2:
+                            $color = "secondary";
+                            break;
+                        case 3:
+                            $color = "success";
+                            break;
+                        case 4:
+                            $color = "danger";
+                            break;
+                        case 5:
+                            $color = "warning";
+                            break;
+                        default:
+                            $color = "primary";
+                            break;
+                    }
+                    $catArray .= '<span class="badge bg-' . $color . '">' . $category->getName() . '</span> ';
                 }
             }
             echo $catArray . "<br>";
@@ -38,7 +56,7 @@ if (!$post) {
         }
     echo "<br>";
     echo '<p class="fw-light text-justify">' . $post->getTextExcerpt() . "</p>";
-    echo '<hr class="mb-5" style="border: 1px solid silver"/>';
+    echo '<hr class="mb-4" style="border: 1px solid silver"/>';
     echo "<strong>" . _("Comments:") . "</strong><br>";
     if ($comments) {
         foreach ($comments as $comment) {
