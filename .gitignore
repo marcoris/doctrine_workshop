@@ -11,3 +11,4 @@ vendor/
 # Vagrant specific
 .vagrant/
 .vagrantuser
+public/Entities/Proxies/
