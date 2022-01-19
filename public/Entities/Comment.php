@@ -58,7 +58,7 @@ class Comment
 
     /**
      * @var \DateTime
-     * @Column(name="created_at", type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @Column(name="created_at", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $createdAt;
 
@@ -66,14 +66,8 @@ class Comment
      * @var Collection
      *
      * @ManyToOne (targetEntity="Post", inversedBy="comments")
-     * @JoinColumn(name="post_id", referencedColumnName="id")
      */
     private $posts;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
-    }
 
     /**
      * @return string
