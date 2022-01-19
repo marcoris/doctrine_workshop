@@ -1,19 +1,25 @@
 <?php
 
-$em = getEntityManager();
-$posts = $em->getRepository(\App\Entities\Post::class)->findBy([],['id' => 'DESC']);
+$posts = getEntityManager()->getRepository(\App\Entities\Post::class)->findBy([],['id' => 'DESC']);
 
 // Check if there is a post
 if (!$posts) {
     echo '<h2 class="display-4">404!</h2><p>' . _("Unfortunately, no posts were found.") . '</p>';
 } else {
-    echo "<div class='row'>
-    <div class='col-8'>";
+    echo "<div class='row'>";
     foreach ($posts as $post) {
-        echo '<h2 class="display-4">' . $post->getTitle() . '</h2>
-          <small>' . $post->getCreatedAt()->format("d. F Y") . " " . _("by") . " " . $post->getAuthor() . '</small><br>';
-        echo "<br>";
-        echo '<p class="fw-light text-justify">' . $post->getTextExcerpt() . "</p>";
+        echo '<div class="col-5 m-0 p-0">
+                <a class="text-decoration-none" href="/blog/' . $post->getId() . '"><img class="img-fluid mb-5" src="https://placeimg.com/300/300/any"></a>
+            </div>
+            <div class="col-7"><h2 class="display-4 mt-0"><a class="text-decoration-none" href="/blog/' . $post->getId() . '">' . $post->getTitle() . '</a></h2><small>' . $post->getCreatedAt()->format("d. F Y") . " " . _("by") . " <a class='link-info' href='/author/" . $post->getAuthor()->getId() . "'>" . $post->getAuthor()->getAuthorName() . "</a>";
+        if ($post->getAuthor()->getAuthorEmail()) {
+            echo " mail: <a class='link-info' href='mailto:" . $post->getAuthor()->getAuthorEmail() . "'>" . $post->getAuthor()->getAuthorEmail() . "</a>";
+        }
+        if ($post->getAuthor()->getAuthorUrl()) {
+            echo " www: <a class='link-info' href='http://" . $post->getAuthor()->getAuthorUrl() . "' target='_blank'>" . $post->getAuthor()->getAuthorUrl() . "</a>";
+        }
+        echo '</small>';
+        echo '<p class="fw-light text-justify">' . $post->getTextExcerpt(160) . "</p>";
 
         $categories = $post->getCategories();
         $tags = $post->getTags();
@@ -58,14 +64,7 @@ if (!$posts) {
             }
             echo $tagArray . "<br>";
         }
-        echo "<hr>";
+        echo "</div><hr>";
     }
-    echo '</div>
-    <div class="col-4 bg-light p-2">
-        <h3 class="display-6 text-center">' . _('Archive') . '</h3>
-        <ul>
-            <li><a href="#">Januar 2022</a></li>
-        </ul>
-    </div>
-</div>';
+    echo "</div>";
 }

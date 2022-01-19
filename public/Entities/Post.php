@@ -39,14 +39,8 @@ class Post
     private $text;
 
     /**
-     * @var string
-     * @Column(type="string", length=140)
-     */
-    private $author;
-
-    /**
      * @var \DateTime
-     * @Column(name="created_at", type="datetime")
+     * @Column(name="created_at", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
     private $createdAt;
 
@@ -67,6 +61,13 @@ class Post
      * @OneToMany (targetEntity="Comment", mappedBy="posts", cascade={"all"})
      */
     private $comments;
+
+    /**
+     * @var Collection
+     *
+     * @ManyToOne (targetEntity="Author")
+     */
+    private $author;
 
     /**
      * @var Collection
@@ -96,9 +97,9 @@ class Post
     }
 
     /**
-     * @return string
+     * @return Collection
      */
-    public function getAuthor(): string
+    public function getAuthor()
     {
         return $this->author;
     }
@@ -134,7 +135,11 @@ class Post
      */
     public function getTextExcerpt(int $length = 200, string $sign = "...")
     {
-        return substr($this->text, 0, $length) . "<a href='/blog/id/" . $this->id . "'>[" . $sign . "]</a>";
+        if (strlen($this->text) < $length) {
+            return $this->text;
+        }
+
+        return substr($this->text, 0, $length) . $sign;
     }
 
     /**
@@ -166,7 +171,6 @@ class Post
         $this->tags = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->createdAt = new \DateTime();
     }
 
     /**
