@@ -37,6 +37,22 @@ class Category
     private $posts;
 
     /**
+     * @return Collection
+     */
+    public function getPosts(): Collection
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param Collection $posts
+     */
+    public function setPosts(Collection $posts): void
+    {
+        $this->posts = $posts;
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
