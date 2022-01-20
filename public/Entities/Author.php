@@ -16,48 +16,48 @@ use Doctrine\ORM\Mapping\Entity;
 class Author
 {
     /**
-     * @var integer
+     * @var int
      * @Id
      * @Column(name="id", type="integer")
      * @GeneratedValue
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
      * @Column(type="string", length=140)
      */
-    private $authorName;
+    private string $name;
 
     /**
-     * @var int
-     * @Column(type="integer")
+     * @var int|null
+     * @Column(type="integer", nullable=true)
      */
-    private $authorAge;
+    private ?int $age;
 
     /**
      * @var string
+     * @Column(type="string", length=140)
+     */
+    private string $email;
+
+    /**
+     * @var string|null
      * @Column(type="string", length=140, nullable=true)
      */
-    private $authorEmail;
+    private ?string $url;
 
     /**
-     * @var string
-     * @Column(type="string", length=140, nullable=true)
-     */
-    private $authorUrl;
-
-    /**
-     * @var string
+     * @var string|null
      * @Column(type="text", nullable=true)
      */
-    private $authorBio;
+    private ?string $bio;
 
     /**
-     * @var Collection
+     * @var Collection|null
      * @OneToMany (targetEntity="Post", mappedBy="author")
      */
-    private $posts;
+    private ?Collection $posts;
 
     /**
      * @return int
@@ -70,87 +70,87 @@ class Author
     /**
      * @return string
      */
-    public function getAuthorName(): string
+    public function getName(): string
     {
-        return $this->authorName;
+        return $this->name;
     }
 
     /**
-     * @param string $authorName
+     * @param string $name
      */
-    public function setAuthorName(string $authorName): void
+    public function setName(string $name): void
     {
-        $this->authorName = $authorName;
+        $this->name = $name;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getAuthorAge(): int
+    public function getAge(): ?int
     {
-        return $this->authorAge;
+        return $this->age;
     }
 
     /**
-     * @param int $authorAge
+     * @param int $age
      */
-    public function setAuthorAge(int $authorAge): void
+    public function setAge(int $age): void
     {
-        $this->authorAge = $authorAge;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAuthorEmail(): string
-    {
-        return $this->authorEmail;
-    }
-
-    /**
-     * @param string $authorEmail
-     */
-    public function setAuthorEmail(string $authorEmail): void
-    {
-        $this->authorEmail = $authorEmail;
+        $this->age = $age;
     }
 
     /**
      * @return string
      */
-    public function getAuthorUrl(): string
+    public function getEmail(): string
     {
-        return $this->authorUrl;
+        return $this->email;
     }
 
     /**
-     * @param string $authorUrl
+     * @param string $email
      */
-    public function setAuthorUrl(string $authorUrl): void
+    public function setEmail(string $email): void
     {
-        $this->authorUrl = $authorUrl;
+        $this->email = $email;
     }
 
     /**
      * @return string|null
      */
-    public function getAuthorBio(): ?string
+    public function getUrl(): ?string
     {
-        return $this->authorBio;
+        return $this->url;
     }
 
     /**
-     * @param string $authorBio
+     * @param string $url
      */
-    public function setAuthorBio(string $authorBio): void
+    public function setUrl(string $url): void
     {
-        $this->authorBio = $authorBio;
+        $this->url = $url;
     }
 
     /**
-     * @return Collection
+     * @return string|null
      */
-    public function getPosts(): Collection
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    /**
+     * @param string $bio
+     */
+    public function setBio(string $bio): void
+    {
+        $this->bio = $bio;
+    }
+
+    /**
+     * @return Collection|null
+     */
+    public function getPosts(): ?Collection
     {
         return $this->posts;
     }

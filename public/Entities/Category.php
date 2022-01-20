@@ -16,25 +16,25 @@ use Doctrine\ORM\Mapping\Entity;
 class Category
 {
     /**
-     * @var integer
+     * @var int
      * @Id
      * @Column(name="id", type="integer")
      * @GeneratedValue
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
      * @Column(type="string", length=140)
      */
-    private $name;
+    private string $name;
 
     /**
      * @var Collection
      *
      * @ManyToMany (targetEntity="Post", mappedBy="categories")
      */
-    private $posts;
+    private Collection $posts;
 
     /**
      * @return Collection

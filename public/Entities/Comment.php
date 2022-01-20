@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use DateTime;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\Id;
@@ -16,36 +17,36 @@ use Doctrine\ORM\Mapping\Entity;
 class Comment
 {
     /**
-     * @var integer
+     * @var int
      * @Id
      * @Column(name="id", type="integer")
      * @GeneratedValue
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
      * @Column(type="string", length=140)
      */
-    private $authorName;
+    private string $name;
 
     /**
-     * @var string
+     * @var string|null
      * @Column(type="string", length=140, nullable=true)
      */
-    private $authorEmail;
+    private ?string $email;
 
     /**
-     * @var string
+     * @var string|null
      * @Column(type="string", length=140, nullable=true)
      */
-    private $authorUrl;
+    private ?string $url;
 
     /**
      * @var string
      * @Column(type="string", length=255)
      */
-    private $comment;
+    private string $comment;
 
     /**
      * @var int
@@ -54,67 +55,67 @@ class Comment
      * 2 = published
      * @Column(type="integer", options={"default":0})
      */
-    private $status = 0;
+    private int $status;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Column(name="created_at", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $createdAt;
+    private DateTime $createdAt;
 
     /**
-     * @var Collection
+     * @var Post
      *
      * @ManyToOne (targetEntity="Post", inversedBy="comments")
      */
-    private $posts;
+    private Post $posts;
 
     /**
      * @return string
      */
-    public function getAuthorName(): string
+    public function getName(): string
     {
-        return $this->authorName;
+        return $this->name;
     }
 
     /**
-     * @param string $authorName
+     * @param string $name
      */
-    public function setAuthorName(string $authorName): void
+    public function setName(string $name): void
     {
-        $this->authorName = $authorName;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getAuthorEmail(): ?string
-    {
-        return $this->authorEmail;
-    }
-
-    /**
-     * @param string $authorEmail
-     */
-    public function setAuthorEmail(string $authorEmail): void
-    {
-        $this->authorEmail = $authorEmail;
+        $this->name = $name;
     }
 
     /**
      * @return string|null
      */
-    public function getAuthorUrl(): ?string
+    public function getEmail(): ?string
     {
-        return $this->authorUrl;
+        return $this->email;
     }
 
     /**
-     * @param string $authorUrl
+     * @param string $email
      */
-    public function setAuthorUrl(string $authorUrl): void
+    public function setEmail(string $email): void
     {
-        $this->authorUrl = $authorUrl;
+        $this->email = $email;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl(string $url): void
+    {
+        $this->url = $url;
     }
 
     /**
@@ -150,17 +151,17 @@ class Comment
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }

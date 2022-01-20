@@ -11,12 +11,12 @@ if (!$post) {
     $comments = $post->getComments();
 
     echo '<img class="img-fluid mb-5" src="https://placeimg.com/600/600/any">
-        <h2 class="display-4">' . $post->getTitle() . '</h2><small>' . $post->getCreatedAt()->format("d. F Y") . " " . _("by") . " <a class='link-info' href='/author/" . $post->getAuthor()->getId() . "'>" . $post->getAuthor()->getAuthorName() . "</a>";
-    if ($post->getAuthor()->getAuthorEmail()) {
-        echo " mail: <a class='link-info' href='mailto:" . $post->getAuthor()->getAuthorEmail() . "'>" . $post->getAuthor()->getAuthorEmail() . "</a>";
+        <h2 class="display-4">' . $post->getTitle() . '</h2><small>' . $post->getCreatedAt()->format("d. F Y") . " " . _("by") . " <a class='link-info' href='/author/" . $post->getAuthor()->getId() . "'>" . $post->getAuthor()->getName() . "</a>";
+    if ($post->getAuthor()->getEmail()) {
+        echo " / <a href='mailto:" . $post->getAuthor()->getEmail() . "'><i class='bi bi-envelope'></i></a>";
     }
-    if ($post->getAuthor()->getAuthorUrl()) {
-        echo " www: <a class='link-info' href='http://" . $post->getAuthor()->getAuthorUrl() . "' target='_blank'>" . $post->getAuthor()->getAuthorUrl() . "</a>";
+    if ($post->getAuthor()->getUrl()) {
+        echo " / <a class='link-danger' href='http://" . $post->getAuthor()->getUrl() . "' target='_blank'><i class='bi bi-globe'></i></a>";
     }
     echo '</small><br>';
         // List categories
@@ -68,29 +68,29 @@ if (!$post) {
         foreach ($comments as $comment) {
             if ($comment->getStatus() >= 2) {
                 echo "<small><em>";
-                if ($comment->getAuthorEmail()) {
-                    echo "<a href='mailto:" . $comment->getAuthorEmail() . "'>";
+                if ($comment->getEmail()) {
+                    echo "<a href='mailto:" . $comment->getEmail() . "'>";
                 }
-                echo $comment->getAuthorName();
-                if ($comment->getAuthorEmail()) {
+                echo $comment->getName();
+                if ($comment->getEmail()) {
                     echo "</a>";
                 }
-                if ($comment->getAuthorUrl()) {
-                    echo " / <a href='http://" . $comment->getAuthorUrl() . "' target='_blank'>" . $comment->getAuthorUrl() . "</a>";
+                if ($comment->getUrl()) {
+                    echo " / <a href='http://" . $comment->getUrl() . "' target='_blank'>" . $comment->getUrl() . "</a>";
                 }
                 echo " " . _("wrote at") . " " . $comment->getCreatedAt()->format("d. F Y") . ":</small><br>";
                 echo "<blockquote><small>" . $comment->getComment() . '</small></blockquote></em><hr style="border: 1px dashed silver;" />';
             } else {
                 echo "<em class='text-muted'>";
-                if ($comment->getAuthorEmail()) {
-                    echo "<a href='mailto:" . $comment->getAuthorEmail() . "'>";
+                if ($comment->getEmail()) {
+                    echo "<a href='mailto:" . $comment->getEmail() . "'>";
                 }
-                echo $comment->getAuthorName();
-                if ($comment->getAuthorEmail()) {
+                echo $comment->getName();
+                if ($comment->getEmail()) {
                     echo "</a>";
                 }
-                if ($comment->getAuthorUrl()) {
-                    echo " / <a href='http://" . $comment->getAuthorUrl() . "' target='_blank'>" . $comment->getAuthorUrl() . "</a>";
+                if ($comment->getUrl()) {
+                    echo " / <a href='http://" . $comment->getUrl() . "' target='_blank'>" . $comment->getUrl() . "</a>";
                 }
                 echo " " . _("wrote at") . " " . $comment->getCreatedAt()->format("d. F Y") . ":<br>";
                 echo $comment->getComment() . '</em><hr style="border: 1px dashed silver;" />';

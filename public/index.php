@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <title>Doctrine Blogpost</title>
 </head>
 <body class="mb-5">
@@ -43,29 +44,56 @@
             <div class="col-9">
                 <?php
                 require_once "bootstrap.php";
-                require_once "posts.php";
-//                require_once "post.php";
-//                require_once "author.php";
-
                 $em = getEntityManager();
 
-                //$category = new \App\Entities\Category();
-                //$category->setName("Category 1");
-                //
-                //$comment = new \App\Entities\Comment();
+//                $pRepo = $em->getRepository(\App\Entities\Product::class);
+//                $cRepo = $em->getRepository(\App\Entities\ProductCategory::class);
+//                $cartRepo = $em->getRepository(\App\Entities\Cart::class);
+
+                // Add product to cart decrement stock
+//                $product = $pRepo->findOneById(1);
+//                $cart = new \App\Entities\Cart();
+//                $cart->addProduct($product);
+//                $em->persist($cart);
+//                $em->flush();
+
+
+                // Remove product from cart increment stock
+//                $cart = $cartRepo->findOneById(1);
+//                $productCollection = $cart->getProducts();
+//                $removeProduct = $productCollection->get(0);
+//                $cart->getProducts()->removeElement($product);
+//
+//                $em->persist($cart);
+//                $em->flush();
+
+//                $cat = $cRepo->findOneById(1);
+//                $categories = $pRepo->getAvailableProducts($cat);
+//
+//                $product = $pRepo->getProductsForPriceRange(1, 100);
+//                foreach ($product as $pro)
+//                    echo $pro->getName() . "<br>";
+//                echo "<hr>";
+//                foreach ($categories as $category)
+//                    echo $category->getName() . "<br>";
+                // Add author
+//                $author = new \App\Entities\Author();
+//                $author->setName("Dieter");
+////                $author->setAge(48);
+//                $author->setEmail("dieter@hans.ch");
+//                $em->persist($author);
+//                $em->flush();
+
                 //$comment->setComment("This is my first comment");
                 //$comment->setAuthorName("Marco");
                 //$comment->setAuthorEmail("marco.ris@risdesign.ch");
                 //$comment->setAuthorUrl("risdesign.ch");
-                //
-                //$em->persist($comment);
-                //$em->flush();
 
-                //$comment = $em->getRepository(\App\Entities\Comment::class)->find(1);
-                //echo $comment->getAuthorName() . "<br>";
-                //echo $comment->getAuthorEmail() . "<br>";
-                //echo $comment->getAuthorUrl() . "<br>";
-                //echo $comment->getComment();
+//                require_once "cart.php";
+//                require_once "posts.php";
+//                require_once "post.php";
+//                require_once "author.php";
+                require_once "authors.php";
                 ?>
                 <!-- Option 1: Bootstrap Bundle with Popper -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

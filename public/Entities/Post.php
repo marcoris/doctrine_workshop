@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Table;
@@ -19,30 +20,30 @@ use Doctrine\ORM\Mapping\JoinTable;
 class Post
 {
     /**
-     * @var integer
+     * @var int
      * @Id
      * @Column(name="id", type="integer")
      * @GeneratedValue
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
      * @Column(type="string", length=140)
      */
-    private $title;
+    private string $title;
 
     /**
      * @var string
      * @Column(type="text")
      */
-    private $text;
+    private string $text;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Column(name="created_at", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
      */
-    private $createdAt;
+    private DateTime $createdAt;
 
     /**
      * @var Collection
@@ -53,21 +54,21 @@ class Post
      *     inverseJoinColumns={@JoinColumn(name="category_id", referencedColumnName="id")}
      *     )
      */
-    private $categories;
+    private Collection $categories;
 
     /**
      * @var Collection
      *
      * @OneToMany (targetEntity="Comment", mappedBy="posts", cascade={"all"})
      */
-    private $comments;
+    private Collection $comments;
 
     /**
-     * @var Collection
+     * @var Author
      *
      * @ManyToOne (targetEntity="Author")
      */
-    private $author;
+    private Author $author;
 
     /**
      * @var Collection
@@ -78,7 +79,7 @@ class Post
      *     inverseJoinColumns={@JoinColumn(name="tag_id", referencedColumnName="id")}
      *     )
      */
-    private $tags;
+    private Collection $tags;
 
     /**
      * @return string
@@ -97,17 +98,17 @@ class Post
     }
 
     /**
-     * @return Collection
+     * @return Author
      */
-    public function getAuthor()
+    public function getAuthor(): Author
     {
         return $this->author;
     }
 
     /**
-     * @param string $author
+     * @param Author $author
      */
-    public function setAuthor(string $author): void
+    public function setAuthor(Author $author): void
     {
         $this->author = $author;
     }
@@ -133,7 +134,7 @@ class Post
      * @param string $sign
      * @return string
      */
-    public function getTextExcerpt(int $length = 200, string $sign = "...")
+    public function getTextExcerpt(int $length = 200, string $sign = "..."): string
     {
         if (strlen($this->text) < $length) {
             return $this->text;
@@ -143,17 +144,17 @@ class Post
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -174,7 +175,7 @@ class Post
     }
 
     /**
-     * @return Collection
+     * @return ArrayCollection|Collection
      */
     public function getCategories(): ArrayCollection|Collection
     {
@@ -182,7 +183,7 @@ class Post
     }
 
     /**
-     * @param Collection $categories
+     * @param ArrayCollection|Collection $categories
      */
     public function setCategories(ArrayCollection|Collection $categories): void
     {
@@ -190,9 +191,9 @@ class Post
     }
 
     /**
-     * @return Tag[]
+     * @return ArrayCollection|Collection|array
      */
-    public function getTags()
+    public function getTags(): ArrayCollection|Collection|array
     {
         return $this->tags;
     }
@@ -205,10 +206,11 @@ class Post
     {
         $this->tags->add($tag);
     }
+
     /**
-     * @return Comment[]
+     * @return ArrayCollection|Collection|array
      */
-    public function getComments()
+    public function getComments(): ArrayCollection|Collection|array
     {
         return $this->comments;
     }
